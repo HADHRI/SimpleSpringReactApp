@@ -1,4 +1,4 @@
-package model;
+package com.first.app.SimpleApp.model;
 
 
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ public class Expense {
 
     @Id
     private Long id;
-    private Instant expenseDate;
     private String description;
+    private Instant expenseDate;
     @ManyToOne
     private Category category;
     @ManyToOne
