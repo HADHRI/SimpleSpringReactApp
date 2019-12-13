@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -19,12 +16,17 @@ import java.time.Instant;
 public class Expense {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     private String description;
+    @Column(name = "expense_date")
     private Instant expenseDate;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.REMOVE})
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Category category;
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
 }
