@@ -5,10 +5,11 @@ class Home extends Component {
     render() { 
         return ( 
             <div>
-                <AppNav></AppNav>
-                <h2>Welcome to the Home page</h2>
+                <AppNav/>
+                <h2 style={{display: 'flex',justifyContent:'center', alignItems:'center', height: '100vh'}}
+                >Welcome to the Home page</h2>
             </div> );
-    }
+    } 
 }
  
 export default Home;

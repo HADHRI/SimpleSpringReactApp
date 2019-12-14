@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import AppNav from './AppNav'
 
 
-
 class  Category extends Component {
     //Internal storage of a component 
     //Equivalent to private fields in java 
