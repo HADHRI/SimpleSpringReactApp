@@ -11,7 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 
-@RestController()
+@RestController
 @RequestMapping("/api")
 public class ExpenseController {
 
@@ -33,8 +33,8 @@ public class ExpenseController {
     }
 
     @PostMapping("/expense")
-    ResponseEntity<Expense> createExpense(@Valid @RequestBody Expense expense) throws URISyntaxException {
+    ResponseEntity<Expense> createExpense(@Valid @RequestBody Expense expense) {
         Expense result = expenseRepository.save(expense);
-        return ResponseEntity.created(new URI("/api/expense" + result.getId())).body(result);
+        return ResponseEntity.ok().build();
     }
 }

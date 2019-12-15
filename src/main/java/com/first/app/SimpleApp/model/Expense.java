@@ -25,11 +25,11 @@ public class Expense {
     private Instant expenseDate;
     @Column(name = "location")
     private String location;
-    @ManyToOne(cascade={CascadeType.REMOVE})
-    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
-    @ManyToOne(cascade=CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnore
     private User user;
 
