@@ -18,12 +18,13 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @Column(name = "description",nullable = false)
     private String description;
-    @Column(name = "expense_date")
+    @Column(name = "expense_date",nullable = false)
     private Instant expenseDate;
-    @Column(name = "location")
+    @Column(name = "location",nullable = false)
     private String location;
     @ManyToOne(cascade={CascadeType.ALL})
     @JoinColumn(name = "category_id", referencedColumnName = "id")
