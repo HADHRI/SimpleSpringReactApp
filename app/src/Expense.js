@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppNav from './AppNav';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { FormGroup, Button,Container,Form,Label,Input} from 'reactstrap';
+import { Table,FormGroup, Button,Container,Form,Label,Input} from 'reactstrap';
 import {Link} from 'react-router-dom'
 import Category from './Category';
 class Expense extends Component { 
@@ -14,6 +14,15 @@ class Expense extends Component {
         categories: [1,'Travel']
     }
 
+    async componentDidMount(){
+        const response =await fetch('api/categories');
+        const body= await response.json();
+        this.setState({categories :body, isLoading : false})
+        const responseExp =await fetch('api/expenses');
+        const bodyExp= await responseExp.json();
+        this.setState({expenses :bodyExp, isLoading : false})
+    }
+ 
     constructor(props){
         super(props)
         this.state = {
@@ -24,23 +33,31 @@ class Expense extends Component {
             item: this.emptyItem
      }
     }
+  
+
 
   
-    async componentDidMount(){
-        const response =await fetch('api/categories');
-        const body= await response.json();
-        this.setState({categories :body, isLoading : false})
-    }
+  
     render() { 
         const title = <h3>Add Expense </h3>
-        const {expenses,isLoading,categories} =this.state;
+        const {categories} =this.state;
+        const {expenses,isLoading}=this.state;
 
        let categoriesList=
             categories.map(category =>
                 <option id={category.id}>
                     {category.name}
               </option>)
-
+        let rows=
+            expenses.map((expense)=>
+            <tr>
+                <td>{expense.description}</td>
+                <td>{expense.location}</td>
+                <td>{expense.expenseDate}</td>
+                <td>{expense.category.name}</td>
+                <td><Button size="sm" color="dangar" onClick={ () =>this.remove(expense)} ></Button></td>
+                
+            </tr>)
         
         if(isLoading)
             return(<div>Loading...</div>)
@@ -79,7 +96,26 @@ class Expense extends Component {
                     </FormGroup>
                 </Form>
             </Container>
-            </div>);
+        {' '}
+        <Container>
+            <h3>Expense List</h3>
+            <Table className="mt-4">
+                <thead>
+                    <tr>
+                        <th width="20%">Description</th>
+                        <th width="10%">Location</th>
+                        <th width="10%">Category</th>  
+                        <th width="10%">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+
+            </Table>
+        </Container>
+        </div> );
     }
 }
  
