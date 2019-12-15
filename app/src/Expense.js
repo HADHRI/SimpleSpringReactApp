@@ -22,6 +22,19 @@ class Expense extends Component {
         const bodyExp= await responseExp.json();
         this.setState({expenses :bodyExp, isLoading : false})
     }
+
+    async remove(id){
+        await fetch(`/api/expense/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+                let updateExpenses = [...this.state.expenses].filter(i => i.id !== id);
+                this.setState({expenses : updateExpenses});
+            })}
+    
  
     constructor(props){
         super(props)
@@ -55,7 +68,7 @@ class Expense extends Component {
                 <td>{expense.location}</td>
                 <td>{expense.expenseDate}</td>
                 <td>{expense.category.name}</td>
-                <td><Button size="sm" color="dangar" onClick={ () =>this.remove(expense)} ></Button></td>
+                <td><Button size="sm" color="danger" onClick={ () =>this.remove(expense.id)} >Delete</Button></td>
                 
             </tr>)
         
@@ -104,6 +117,7 @@ class Expense extends Component {
                     <tr>
                         <th width="20%">Description</th>
                         <th width="10%">Location</th>
+                        <th width="10%">Date</th>
                         <th width="10%">Category</th>  
                         <th width="10%">Action</th>
 
