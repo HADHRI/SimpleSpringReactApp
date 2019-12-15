@@ -9,8 +9,8 @@ class Expense extends Component {
 
     emptyItem = {
         expenseDate: new Date(),
-        description: "",
-        location: "",
+        description: null,
+        location: null,
         category: {name :'Travel'}
     }  
 
