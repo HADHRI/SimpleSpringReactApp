@@ -94,7 +94,7 @@ class Expense extends Component {
               </option>)
         let rows=
             expenses.map(expense=>
-             <tr >
+             <tr key={expense.id}>
                 <td>{expense.description}</td>
                 <td>{expense.location}</td>
                 <td><Moment date={expense.expenseDate} format="YYYY/MM/DD"/> </td>

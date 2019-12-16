@@ -3,6 +3,7 @@ package com.first.app.SimpleApp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -14,8 +15,8 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    @Column(name = "name",nullable = false)
+    @NonNull
     private String name;
 }
